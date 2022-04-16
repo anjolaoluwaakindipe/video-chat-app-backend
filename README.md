@@ -1,0 +1,15 @@
+
+
+## EVIRONMENT VARIABLES NEEDED
+### SECRET_KEY
+- Access token secret key
+
+### TOKEN_EXPIRE_TIME 
+- Expiration time of access token (must be a number)
+
+### POSTGRES VARIABLES
+1. POSTGRES_USER 
+2. POSTGRES_PASSWORD 
+3. POSTGRES_DBNAME 
+4. POSTGRES_PORT 
+5. SERVER_PORT
