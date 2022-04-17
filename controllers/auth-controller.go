@@ -37,7 +37,16 @@ func (ac *AuthController) SignUpUser() gin.HandlerFunc {
 			return
 		}
 
+		userCheckErrs := ac.AuthService.CheckIfUserExist(signupInfo.Email, signupInfo.Username)
+
+		if userCheckErrs != nil {
+			ctx.JSON(http.StatusConflict, userCheckErrs)
+			return 
+		}
+
+
 		error := ac.UserService.SaveUser(*signupInfo)
+
 		if error != nil {
 			ctx.JSON(error.Code, error)
 			return
@@ -80,7 +89,7 @@ func (ac *AuthController) LoginUser() gin.HandlerFunc {
 
 		ctx.JSON(http.StatusOK, map[string]interface{}{
 			"accessToken":          token,
-			"accessTokenExpiresAt": ac.envVars.TokenExpireTime,
+			"accessTokenExpiresTime": ac.envVars.AccessTokenExpireTime,
 		})
 		return
 

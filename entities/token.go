@@ -7,12 +7,14 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
+// App token Struct for working with tokens
 type Token struct {
 	Id    string
 	Email string
 	jwt.StandardClaims
 }
 
+// Creates an access token string 
 func (t *Token) CreateAccessTokenString(signingMethod jwt.SigningMethod, secretKey string) (string, *errs.AppError) {
 
 	tokenWithClaims := jwt.NewWithClaims(signingMethod, t)

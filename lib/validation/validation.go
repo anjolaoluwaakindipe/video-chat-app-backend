@@ -32,7 +32,7 @@ func (v *ValidationHandler) ValidateStruct(entity interface{}) map[string]string
 
 	en_translations.RegisterDefaultTranslations(validation, trans)
 
-	fmt.Println(entity)
+	
 
 	err := validation.Struct(entity)
 

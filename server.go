@@ -40,14 +40,14 @@ func main() {
 }
 
 func bootstrap(lifecycle fx.Lifecycle, postgres *db.PGDB, handler *handler.Handler, routes *routes.AllRouters, logger *logger.Logger, envVars *env.EnvVar) {
-
-	postgresConfig := "user=" + envVars.PostgresUser + " password=" + envVars.PostgresPassword + " dbname=" + envVars.PostgresDbname + " port=" + envVars.PostgresPort + " sslmode=disable TimeZone=Asia/Shanghai"
+	// "host=" + envVars.PostgresHost + " user=" + envVars.PostgresUser + " password=" + envVars.PostgresPassword + " dbname=" + envVars.PostgresDbname + " port=" + envVars.PostgresPort + " sslmode=disable TimeZone=Asia/Shanghai"
+	postgresConfig := "postgres://"+envVars.PostgresUser+":"+envVars.PostgresPassword+"@"+envVars.PostgresHost+":"+envVars.PostgresPort+"/"+envVars.PostgresDbname+"?sslmode=disable"
 
 	postgres.OpenNewPSQLDB(logger.Logger, postgresConfig)
 	routes.SetUp()
 
 	server := &http.Server{
-		Addr:    "localhost:" + envVars.ServerPort,
+		Addr:    ":" + envVars.ServerPort,
 		Handler: handler.Gin,
 	}
 

@@ -1,4 +1,6 @@
 .env
-
+vendor/
 gin-bin.exe
 gin-bin.exe~
+run.txt
+.env.test
